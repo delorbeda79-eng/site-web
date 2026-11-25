@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEVAGE CI</title>
+</head>
+<body>
+    
+  <style>
+    :root {
+      --green: #214a35;
+      --green2: #376547;
+      --cream: #f7f5ed;
+      --gold: #e3b75b;
+      --ink: #1c2a21;
+      --muted: #68746a;
+      --line: #dedfd4;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Arial, Helvetica, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1120px, 88%);
+      margin: auto;
+    }
+
+    .header {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--green);
+    }
+
+    .logo span { color: var(--gold); }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+      color: #4f5c52;
+    }
+
+    nav a:hover { color: var(--green2); }
+
+    .nav-cta,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      background: var(--green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 4px;
+      transition: .2s;
+    }
+
+    .nav-cta:hover,
+    .btn:hover {
+      background: var(--green2);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      min-height: 530px;
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, rgba(13,37,24,.86), rgba(13,37,24,.48) 52%, rgba(13,37,24,.1)),
+        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1900&q=85")
+        center / cover;
+      display: flex;
+      align-items: center;
+      color: white;
+      padding: 7%;
+    }
+
+    .hero-content { max-width: 590px; }
+
+    .tag {
+      font-size: 10px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font: 500 clamp(48px, 7vw, 78px)/.98 var(--serif);
+      letter-spacing: -2px;
+      margin: 19px 0;
+    }
+
+    .hero p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #eef0e8;
+      max-width: 465px;
+      margin-bottom: 27px;
+    }
+
+    .btn.light {
+      background: var(--gold);
+      color: #202c22;
+    }
+
+    .btn.light:hover { background: #efc971; }
+
+    .hero .micro {
+      display: block;
+      margin-top: 22px;
+      font-size: 11px;
+      color: #e2e6db;
+    }
+
+    .intro {
+      padding: 78px 0 42px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      color: var(--green2);
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    h2 {
+      font: 500 clamp(34px, 4vw, 48px)/1.08 var(--serif);
+      letter-spacing: -.8px;
+      color: var(--green);
+      margin: 13px 0;
+    }
+
+    h2 em { color: #a47732; }
+
+    .intro p:last-child {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .products { padding: 45px 0 80px; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 5px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #ecebe3;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px #203b2815;
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      height: 168px;
+      object-fit: cover;
+      background: #e6e7dc;
+    }
+
+    .card-body { padding: 16px; }
+
+    .card h3 {
+      font: 500 22px var(--serif);
+      color: var(--green);
+      margin: 0 0 7px;
+    }
+
+    .card p {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--muted);
+      min-height: 38px;
+      margin: 0 0 13px;
+    }
+
+    .card-link {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8c682e;
+    }
+
+    .card-link span { padding-left: 5px; }
+
+    .promise {
+      background: #e9ecdf;
+      padding: 53px 0;
+    }
+
+    .promise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .promise-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .icon {
+      height: 42px;
+      width: 42px;
+      flex: none;
+      border-radius: 50%;
+      background: #d8e0c8;
+      color: var(--green);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+    }
+
+    .promise h3 {
+      font: 500 19px var(--serif);
+      margin: 0 0 7px;
+      color: var(--green);
+    }
+
+    .promise p {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .contact {
+      padding: 78px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .contact-copy > p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+      max-width: 390px;
+    }
+
+    .contact-info {
+      margin-top: 25px;
+      font-size: 13px;
+      line-height: 2;
+      color: var(--green);
+    }
+
+    form {
+      background: #fff;
+      padding: 25px;
+      border: 1px solid #ecebe3;
+      border-radius: 6px;
+      display: grid;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #465349;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #dfe2d8;
+      border-radius: 3px;
+      font: 13px var(--sans);
+      background: #fff;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    textarea { resize: vertical; }
+
+    .form-note {
+      font-size: 10px;
+      color: #788178;
+      line-height: 1.5;
+      margin: 2px 0 0;
+    }
+
+    .form-btn {
+      border: 0;
+      justify-content: center;
+      cursor: pointer;
+      font: 700 12px var(--sans);
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    footer {
+      background: #193a29;
+      color: white;
+      padding: 36px 0 20px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-logo { color: white; }
+
+    .footer-top p {
+      font-size: 12px;
+      color: #d2ddd2;
+      margin: 0;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #42604b;
+      margin-top: 27px;
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #c3d0c4;
+    }
+
+    @media (max-width: 800px) {
+      .header { height: 70px; }
+      .header nav { display: none; }
+      .hero { min-height: 490px; }
+      .intro {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding-top: 60px;
+      }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .contact { gap: 32px; }
+      .promise-grid { gap: 20px; }
+    }
+
+    @media (max-width: 540px) {
+      .wrap { width: 90%; }
+      .logo { font-size: 19px; }
+      .nav-cta { padding: 11px; font-size: 10px; }
+      .hero {
+        min-height: 500px;
+        padding: 8%;
+        background-position: 58% center;
+      }
+      .hero p { font-size: 13px; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 10px; }
+      .grid { gap: 10px; }
+      .card img { height: 130px; }
+      .card-body { padding: 12px; }
+      .card h3 { font-size: 19px; }
+      .card p { font-size: 11px; }
+      .promise-grid { grid-template-columns: 1fr; }
+      .promise { padding: 38px 0; }
+      .contact {
+        grid-template-columns: 1fr;
+        padding: 58px 0;
+      }
+      .footer-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .footer-bottom {
+        gap: 12px;
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <header class="header wrap">
+    <a class="logo" href="#accueil">delor<span>Elevage</span></a>
+
+    <nav aria-label="Navigation principale">
+      <a href="#animaux">Nos animaux</a>
+      <a href="#engagements">Nos engagements</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="nav-cta" href="#contact">Commander <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="accueil">
+      <div class="hero-content">
+        <span class="tag">Élevage & vente d’animaux</span>
+        <h1>Le bon élevage<br>commence ici.</h1>
+        <p>
+          Découvrez des animaux d’élevage sélectionnés avec soin pour vos
+          projets agricoles, votre ferme ou votre activité.
+        </p>
+        <a class="btn light" href="#animaux">Voir nos animaux <span>→</span></a>
+        <span class="micro">Un contact direct • Des conseils personnalisés</span>
+      </div>
+    </section>
+
+    <section class="intro wrap">
+      <div>
+        <span class="eyebrow">Bienvenue chez delorElevage</span>
+        <h2>Des animaux sains,<br><em>un élevage durable.</em></h2>
+      </div>
+      <p>
+        Nous mettons en relation les éleveurs et les acheteurs autour d’une
+        sélection variée d’animaux. Parcourez notre catalogue et contactez-nous
+        pour connaître les disponibilités, les prix et les conditions de vente.
+      </p>
+    </section>
+
+    <section class="products wrap" id="animaux">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Notre catalogue</span>
+          <h2>Choisissez votre élevage</h2>
+        </div>
+        <p>Contactez-nous pour les disponibilités et les tarifs.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=700&q=80" alt="Poules dans un élevage">
+          <div class="card-body">
+            <h3>Volailles</h3>
+            <p>Poules et autres volailles pour votre élevage.</p>
+            <a class="card-link" href="#contact">Demander le prix <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=700&q=80" alt="Porcs dans une ferme">
+          <div class="card-body">
+            <h3>Porcins</h3>
+            <p>Des porcs pour les besoins de votre exploitation.</p>
+            <a class="card-link" href="#contact">Demander le prix <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1524024973431-2ad916746881?auto=format&fit=crop&w=700&q=80" alt="Bovins au pâturage">
+          <div class="card-body">
+            <h3>Bovins</h3>
+            <p>Animaux bovins selon les disponibilités de l’élevage.</p>
+            <a class="card-link" href="#contact">Demander le prix <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1583301286816-f4f05e1e8b25?auto=format&fit=crop&w=700&q=80" alt="Lapin dans l’herbe">
+          <div class="card-body">
+            <h3>Lapins</h3>
+            <p>Lapins d’élevage pour démarrer ou compléter votre activité.</p>
+            <a class="card-link" href="#contact">Demander le prix <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1484557985045-edf25e08da73?auto=format&fit=crop&w=700&q=80" alt="Moutons dans un champ">
+          <div class="card-body">
+            <h3>Moutons</h3>
+            <p>Un choix de moutons selon les arrivages disponibles.</p>
+            <a class="card-link" href="#contact">Demander le prix <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1524024973431-2ad916746881?auto=format&fit=crop&w=700&q=80" alt="Chèvre dans une ferme">
+          <div class="card-body">
+            <h3>Chèvres</h3>
+            <p>Des chèvres adaptées aux projets d’élevage.</p>
+            <a class="card-link" href="#contact">Demander le prix <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1555852095-64e7428df0fa?auto=format&fit=crop&w=700&q=80" alt="Canards sur une mare">
+          <div class="card-body">
+            <h3>Canards</h3>
+            <p>Canards d’élevage, selon les quantités disponibles.</p>
+            <a class="card-link" href="#contact">Demander le prix <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=700&q=80" alt="Pintades dans un élevage">
+          <div class="card-body">
+            <h3>Pintades</h3>
+            <p>Pintades pour votre ferme ou votre élevage avicole.</p>
+            <a class="card-link" href="#contact">Demander le prix <span>↗</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="promise" id="engagements">
+      <div class="wrap promise-grid">
+        <div class="promise-item">
+          <span class="icon">✓</span>
+          <div>
+            <h3>Conseils utiles</h3>
+            <p>Nous vous aidons à choisir en fonction de votre projet et de vos besoins.</p>
+          </div>
+        </div>
+
+        <div class="promise-item">
+          <span class="icon">♡</span>
+          <div>
+            <h3>Élevage responsable</h3>
+            <p>Le bien-être des animaux et leur suivi sont au cœur de notre démarche.</p>
+          </div>
+        </div>
+
+        <div class="promise-item">
+          <span class="icon">⌂</span>
+          <div>
+            <h3>Contact direct</h3>
+            <p>Échangez avec nous pour connaître les animaux disponibles et organiser votre achat.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact wrap" id="contact">
+      <div class="contact-copy">
+        <span class="eyebrow">Un projet en tête ?</span>
+        <h2>Parlons de votre<br><em>prochain élevage.</em></h2>
+        <p>
+          Indiquez-nous les animaux qui vous intéressent et la quantité recherchée.
+          Nous vous répondrons pour discuter des disponibilités et des tarifs.
+        </p>
+        <div class="contact-info">
+          📍 Côte d’Ivoire<br>
+          ☎ Téléphone : <a href="tel:+2250160573273">01 60 57 32 73</a><br>
+          WhatsApp : <a href="https://wa.me/2250160573273">Écrire sur WhatsApp</a><br>
+          ✉ E-mail : delorbeda79@gmail.com
+        </div>
+      </div>
+
+      <form action="mailto:contact@delorelevage.example" method="post" enctype="text/plain">
+        <label for="nom">Votre nom</label>
+        <input id="nom" name="Nom" type="text" placeholder="Nom et prénom" required>
+
+        <label for="telephone">Téléphone / WhatsApp</label>
+        <input id="telephone" name="Téléphone" type="tel" placeholder="Votre numéro" required>
+
+        <label for="animal">Animal recherché</label>
+        <select id="animal" name="Animal">
+          <option value="">Choisir une catégorie</option>
+          <option>Volailles</option>
+          <option>Porcins</option>
+          <option>Bovins</option>
+          <option>Lapins</option>
+          <option>Moutons</option>
+          <option>Chèvres</option>
+          <option>Canards</option>
+          <option>Pintades</option>
+        </select>
+
+        <label for="message">Votre demande</label>
+        <textarea id="message" name="Demande" rows="4" placeholder="Quantité, lieu, questions…"></textarea>
+
+        <button class="btn form-btn" type="submit">Envoyer ma demande ↗</button>
+
+        <p class="form-note">
+          Pensez à remplacer l’adresse de démonstration par votre adresse e-mail
+          avant la mise en ligne.
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="logo footer-logo" href="#accueil">delor<span>Elevage</span></a>
+        <p>Des élevages de confiance, près de chez vous.</p>
+        <a href="#contact">Nous contacter ↗</a>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 delorElevage</span>
+        <span>Vente selon disponibilités et conditions convenues avec l’éleveur.</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
